@@ -1,6 +1,6 @@
 # Tic-Tac-Toe with AI
 
-![Game Screenshot](assets/menu.png)
+![Game Screenshot](assets/menu.png.png)
 
 A Python implementation of Tic-Tac-Toe featuring:
 - Player vs Player mode
