@@ -12,3 +12,7 @@ A Python implementation of Tic-Tac-Toe featuring:
 - 🤖 Smart bot using advanced algorithms
 - 🎮 Interactive game board with animations
 - 🏆 Win detection with visual effects
+
+## Requirements
+- python installation
+- pygame installation 
