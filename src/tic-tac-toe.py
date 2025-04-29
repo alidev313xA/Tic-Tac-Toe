@@ -36,6 +36,7 @@ class GameState:
         self.winner = None
         self.game_over = False
         self.winning_cells = []
+        self.lock_moves = False # to prevent a player play again untill opponent has made move 
     
     def make_move(self, row, col):
         """Make a move on the board"""
@@ -359,11 +360,12 @@ def main():
                             game_state.reset()
                             
                 elif current_screen == GAME_SCREEN and not is_animating_win:
-                    # Calculate which cell was clicked
-                    relative_x = mouse_pos[0] - container_rect.left
-                    relative_y = mouse_pos[1] - container_rect.top
-                    cell_size = CONTAINER_SIZE // 3
-                    
+                    if (selected_opponent == "friend" or (game_state.current_player == "X" and not game_state.lock_moves)): 
+                        # Calculate which cell was clicked
+                        relative_x = mouse_pos[0] - container_rect.left
+                        relative_y = mouse_pos[1] - container_rect.top
+                        cell_size = CONTAINER_SIZE // 3
+                        
                     if 0 <= relative_x < CONTAINER_SIZE and 0 <= relative_y < CONTAINER_SIZE:
                         col = int(relative_x // cell_size)
                         row = int(relative_y // cell_size)
@@ -384,11 +386,14 @@ def main():
         
         # Add bot move handling 
         if (current_screen == GAME_SCREEN and selected_opponent == "bot" and game_state.current_player == "O" and not is_animating_win
-            and current_time - last_move_time > BOT_MOVE_DELAY):
+            and current_time - last_move_time > BOT_MOVE_DELAY and not game_state.lock_moves):
+            
+            game_state.lock_moves = True
             row, col = get_bot_move(game_state)
             if game_state.make_move(row, col) and game_state.game_over:
                 win_animation_start = current_time
                 is_animating_win = True
+            game_state.lock_moves = False
             last_move_time = current_time  # Reset the timer
                             
         # Check if animation should end
@@ -410,6 +415,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-# In your game code (temporarily add):
-pygame.image.save(screen, "screenshot.png")
