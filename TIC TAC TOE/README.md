@@ -1,6 +1,6 @@
-# 🎯 Minimax vs Alpha-Beta Pruning in Tic-Tac-Toe AI
+# Minimax vs Alpha-Beta Pruning in Tic-Tac-Toe AI
 
-## 🧠 How They Work Differently (Conceptually)
+## How They Work Differently (Conceptually)
 
 ### Minimax (Exhaustive Search)
 
